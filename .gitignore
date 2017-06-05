@@ -1,6 +1,14 @@
+# models used for testing
+*.obj
+*.fbx
+
+# AHK Junk
+*.ini
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+contents.obv
 
 # Folder config file
 Desktop.ini

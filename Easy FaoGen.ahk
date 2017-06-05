@@ -30,7 +30,7 @@
 
 
 ;GUI
-	Gui, Add, Button, x12 y170 w200 h30 gBakeButton, Bake Dat Shit!
+	Gui, Add, Button, x12 y170 w200 h30 gBakeButton, Bake!
 	Gui, Add, Text, x12 y10 w60 h20 , Resolution:
 	Gui, Add, Edit, x12 y30 w70 h20 vXRes, %XRes%
 	Gui, Add, Text, x82 y30 w10 h20 , X
