@@ -4,7 +4,7 @@
 	SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	SendMode Input
 	#NoEnv
-	SetBatchLines
+	SetBatchLines -1
 	ListLines Off
 
 ;Make sure the user drag n dropped a file on to this or it won't work.
