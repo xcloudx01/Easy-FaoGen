@@ -1,25 +1,25 @@
-﻿;Environment
-	#singleinstance force ;Script can only be run as one instance. Good for testing.
+﻿;;;;;Edit line 68 to point to your faogenbatch.exe file if it's not in the default location on C;;;;;
+;Environment
+	#singleinstance force
 	SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-	SendMode Input  ; Sets input to be instant.
-	;Performance improvements
-		#NoEnv ;No environmental variables, speeds up script. Disable if there are problems.
-		SetBatchLines -1 ;Runs script as fast as possible, improves speed.
-		ListLines Off ;Disables debugger, improves speed.
+	SendMode Input
+	#NoEnv
+	SetBatchLines
+	ListLines Off
 
 ;Make sure the user drag n dropped a file on to this or it won't work.
 	if 0 = 0 ;0 is the variable for if a file is dragged n dropped. The var 0 will be 1 if a file was dropped.
 	{
 		msgbox,,Doh!,You need to drag & drop a model on to this exe!`n`nExiting..
 		exitapp
-		}
+	}
 
 
-;INI check
+;Handle INI file for saved settings.
 	Ifexist,FaoGenSettings.ini
 	{
-		fileread,Temp,FaoGenSettings.ini
-		ifinstring,Temp,[settings] ;make sure the file actually contains shit we want.
+		Fileread,Temp,FaoGenSettings.ini
+		Ifinstring,Temp,[settings] ;make sure the ini file actually contains stuff we want.
 			GoSub,LoadSettings
 		Else
 			gosub, SetDefaultVariableValues
@@ -44,13 +44,14 @@
 	Gui, Show, h210 w233, Faogen Quick Bake
 Return
 
-GuiClose:
-gosub,SaveSettings
-ExitApp
+;Buttons
 
-;Main
+	GuiClose:
+	Gosub,SaveSettings
+	ExitApp
+
 	BakeButton:
-		gosub,SaveSettings
+		Gosub,SaveSettings
 		if HighQuality
 			Quality = 50
 		else 
@@ -59,7 +60,7 @@ ExitApp
 			msaa = -msaa 8
 		Else
 			msaa =
-		Loop %0%  ; For each parameter (or file dropped onto a script):
+		Loop %0%  ; Loop for each file dropped onto a script:
 		{
 		    GivenPath := %A_Index%  ; Fetch the contents of the variable whose name is contained in A_Index.
 		    Loop %GivenPath%, 1
@@ -88,7 +89,7 @@ ExitApp
 		IniWrite,%AA%,FaoGenSettings.ini,Settings,AA
 		return
 
-	SetDefaultVariableValues: ;if the inifile isnt found then make these values the default to use.
+	SetDefaultVariableValues: ;if the INI file isnt found then make these values the defaults.
 		Xres = 2048
 		YRes = 2048
 		EdgePadding = 16

@@ -4,6 +4,7 @@
 
 # AHK Junk
 *.ini
+*.bak
 
 # Windows image file caches
 Thumbs.db
